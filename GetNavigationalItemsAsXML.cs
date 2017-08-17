@@ -71,6 +71,9 @@ namespace Tridion.Extensions.ContentManager.Templating
                 Logger.Info("PUSHING_SITEMAP_XML_IN_PACKAGE: "+DateTime.Now.ToString());
                 Logger.Info("DocumentElement:- " + navigationXml.DocumentElement);
                 Package.PushItem("SiteMap_XML", Package.CreateXmlDocumentItem(ContentType.Xml, navigationXml));
+                
+                // Use function GetHTMLNavMenu() for building just a UL, LI based HTML
+                //Package.PushItem("Navigation_HTML", Package.CreateHtmlItem(GetHTMLNavMenu(navigationXml.DocumentElement)));
             }
             catch(Exception ex)
             {
@@ -81,6 +84,11 @@ namespace Tridion.Extensions.ContentManager.Templating
         #endregion
 
         #region FUNCTIONS TO BUILD SITEMAP XML
+        /// <summary>
+        /// Use this function to build just a UL, LI based HTML Navigation
+        /// </summary>
+        /// <param name="elm"></param>
+        /// <returns></returns>
         private string GetHTMLNavMenu(XmlElement elm)
         {
             string result = "";
